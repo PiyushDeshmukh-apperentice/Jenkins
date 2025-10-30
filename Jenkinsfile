@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                git branch: 'main', url: 'https://github.com/PiyushDeshmukh-apperentice/Jenkins.git'
+                git branch: 'master', url: 'https://github.com/<your-username>/ecommerce-jenkins-demo.git'
             }
         }
 
