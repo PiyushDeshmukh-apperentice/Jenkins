@@ -40,16 +40,16 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                echo '🚀 Starting Streamlit app...'
+                echo '🚀 Deploying Streamlit App...'
                 sh '''#!/bin/bash
                     set -e
                     pkill -f "streamlit run" || true
                     nohup ${VENV_DIR}/bin/streamlit run app.py --server.port=${APP_PORT} --server.address=0.0.0.0 > streamlit.log 2>&1 &
-                    sleep 5
-                    echo "Streamlit is now running on port ${APP_PORT}"
+                    echo "Streamlit app started successfully in background!"
                 '''
             }
         }
+
     }
 
     post {
