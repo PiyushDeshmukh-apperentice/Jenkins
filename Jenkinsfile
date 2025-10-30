@@ -10,15 +10,17 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Cloning repository...'
-                git branch: 'master', url: 'https://github.com/<your-username>/ecommerce-jenkins-demo.git'
+                echo '📦 Cloning repository...'
+                git branch: 'master', url: 'https://github.com/PiyushDeshmukh-apperentice/Jenkins.git'
             }
         }
 
         stage('Setup Python Environment') {
             steps {
-                echo 'Setting up Python virtual environment...'
+                echo '🐍 Setting up Python virtual environment...'
                 sh '''
+                    #!/bin/bash
+                    set -e
                     python3 -m venv ${VENV_DIR}
                     source ${VENV_DIR}/bin/activate
                     pip install --upgrade pip
@@ -29,8 +31,9 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo 'Running basic sanity tests...'
+                echo '🧪 Running basic sanity tests...'
                 sh '''
+                    #!/bin/bash
                     source ${VENV_DIR}/bin/activate
                     python -m streamlit --version
                 '''
@@ -39,8 +42,9 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                echo 'Starting Streamlit app...'
+                echo '🚀 Starting Streamlit app...'
                 sh '''
+                    #!/bin/bash
                     pkill -f "streamlit run" || true
                     nohup ${VENV_DIR}/bin/streamlit run app.py --server.port=${APP_PORT} --server.address=0.0.0.0 &
                 '''
